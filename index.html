@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+
+<!-- Notes
+Home/Settings View (used to edit the exercise model)
+ExerciseView (Use to interact with the exercise Model)
+ExerciseModel:
+  * Number of Items displayed
+  * Set of items (in random order)
+  * Progress (how far through the set)
+  * Score (What you got right)
+
+Example:
+attributes:
+  count: 2 (2 items displayed at a time)
+  set: (set of items) [apple, banana, orange]
+  progress: 1 (on the 2nd item)
+  ??? score: 1 (got right)
+
+methods:
+  getCurrentProblem()  -> A,B,C
+  makeGuess(A) -> true/false
+  nextProblem
+
+How it works::
+* There are a "set" of items
+* These are in a random order
+* an item is taken from the list, and n-1 items are chosen at random (maybe base on "offset")
+* there are displayed, a user then chooses
+  * if wrong, something happens to indicate
+  * if right, user goes to next "problem"
+* Item:
+  * id
+  * image
+  * Label
+  * Audio prompting
+* generateProblem Pseudo Code:
+  getTheItem
+  pick n-1 from set-theItem
+  Randomly sort them
+* Another way to look at it
+  offset list n-1? [1,2,3,4]
+  random sort
+  slice + random insert
+  map to set
+  
+
+
+-->
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Example App</title>
+</head>
+<body>
+
+<div id="wrapper" class="yui3-app yui3-app-views"></div>
+
+<script src="http://yui.yahooapis.com/3.8.0/build/yui/yui-min.js"></script>
+<script>
+  YUI().use('app-base', 'model', 'view', 'handlebars', function (Y) {
+
+    Y.ExerciseModel = Y.Base.create('exerciseModel', Y.Model, [], {
+
+      nextProblem: function () {
+        this.set('progress', this.get('progress') + 1);
+        this.set('current', null);
+      },
+
+      makeGuess: function(item) {
+        return (this.getCurrentItem() == item);
+      },
+
+      getCurrentItem: function() {
+        return this.get('items')[this.get('progress')];
+      },
+
+      getCurrentProblem: function() {
+        var map,
+            x, 
+            items, 
+            problem = this.get('current');
+
+        if (!problem) {
+          problem = [];
+          items = this.get('items');
+          map = this._generateProblem(this.get('progress'), this.get('count'), items.length);
+          for (x = 0; x < map.length ; x++) {
+            problem.push(items[map[x]]);
+          }
+          this.set('current', problem)
+        }
+        return problem;
+      },
+
+      _generateProblem: function(item, count, total) {
+        var x, set = [];
+        for (x=0; x<total; x++) {
+          if (x != item) {
+            set.push(x);
+          }
+        }
+        set = this._shuffle(set);
+        set = set.slice(0,count-1);
+        set.push(item);
+        set = this._shuffle(set);
+        return set;
+      },
+
+      _shuffle: function(array) {
+        var tmp, current, top = array.length;
+
+        if(top) while(--top) {
+          current = Math.floor(Math.random() * (top + 1));
+          tmp = array[current];
+          array[current] = array[top];
+          array[top] = tmp;
+        }
+
+        return array;
+      }
+
+    }, {
+      ATTRS: {
+        progress: {
+          value: 0 // default value
+        },
+
+        count: {
+          value: 4 // default value
+        },
+
+        items: {
+          value: ['apple', 'orange', 'carrot', 'milk', 'bread']
+        },
+
+        current: {
+          value: null
+        }
+      }
+    });
+
+    Y.HomeView = Y.Base.create('homeView', Y.View, [], {
+      template: Y.Handlebars.compile('Hello {{name}}!, <a href="/speech/examples">Start</a>'),
+
+      render: function () {
+        var name = this.get('name'),
+            html = this.template({name: name});
+
+        this.get('container').setHTML(html);
+        return this;
+      }
+    });
+
+    Y.ExerciseView = Y.Base.create('exerciseView', Y.View, [], {
+      events: {
+        '.exercise': {click: 'chooseItem'}
+      },
+
+      template: Y.Handlebars.compile('Choose {{item}}: <div class="exercise">Set: {{set}}</div>'),
+
+      initializer: function () {
+        var model = this.get('model');
+        model.after(['reset', 'change'], this.render, this);
+      },
+
+      render: function () {
+        var exercise = this.get('model');
+        var item = exercise.getCurrentItem();
+        var set = this.get('model').getCurrentProblem();
+        var html = this.template({item: item, set: set.join()});
+
+        this.get('container').setHTML(html);
+        return this;
+      },
+
+      chooseItem: function() {
+        var exercise = this.get('model');
+        exercise.nextProblem();
+      }
+    });
+
+    var app = new Y.App({
+      container    : '#wrapper',
+      viewContainer: '#wrapper',
+      views: {
+        home: {type: 'HomeView', preserve: true},
+        exercise: {type: 'ExerciseView', preserve: true}
+      }
+    });
+
+    app.route('/speech/', function () {
+      this.showView('home', {name: 'Home'});
+    });
+
+    app.route('/speech/:name', function (req) {
+      var name = req.params.name;
+      var exercise = new Y.ExerciseModel();
+      this.showView('exercise', {name: name, model: exercise})
+    });
+
+    app.render().dispatch();
+
+  });
+    </script>
+
+</body>
+</html>
