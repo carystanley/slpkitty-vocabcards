@@ -154,10 +154,10 @@ How it works::
 
     Y.ExerciseView = Y.Base.create('exerciseView', Y.View, [], {
       events: {
-        '.exercise': {click: 'chooseItem'}
+        '.exercise div': {click: 'chooseItem'}
       },
 
-      template: Y.Handlebars.compile('Choose {{item}}: <div class="exercise">Set: {{#each set}}<div>{{.}}</div>{{/each}}</div>'),
+      template: Y.Handlebars.compile('Choose {{item}}: <div class="exercise">Set: {{#each set}}<div data-id="{{.}}">{{.}}</div>{{/each}}</div>'),
 
       initializer: function () {
         var model = this.get('model');
@@ -174,9 +174,16 @@ How it works::
         return this;
       },
 
-      chooseItem: function() {
-        var exercise = this.get('model');
-        exercise.nextProblem();
+      chooseItem: function(e) {
+        var item_id = e.currentTarget.getAttribute('data-id'),
+            exercise = this.get('model');
+
+        if (exercise.makeGuess(item_id)) {
+          alert('Right!');
+          exercise.nextProblem();
+        } else {
+          alert('Wrong!');
+        }
       }
     });
 
