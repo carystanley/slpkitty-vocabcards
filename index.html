@@ -1,49 +1,16 @@
 <!DOCTYPE html>
 
 <!-- Notes
-Home/Settings View (used to edit the exercise model)
-ExerciseView (Use to interact with the exercise Model)
-ExerciseModel:
-  * Number of Items displayed
-  * Set of items (in random order)
-  * Progress (how far through the set)
-  * Score (What you got right)
 
-Example:
-attributes:
-  count: 2 (2 items displayed at a time)
-  set: (set of items) [apple, banana, orange]
-  progress: 1 (on the 2nd item)
-  ??? score: 1 (got right)
+ToDo:
 
-methods:
-  getCurrentProblem()  -> A,B,C
-  makeGuess(A) -> true/false
-  nextProblem
-
-How it works::
-* There are a "set" of items
-* These are in a random order
-* an item is taken from the list, and n-1 items are chosen at random (maybe base on "offset")
-* there are displayed, a user then chooses
-  * if wrong, something happens to indicate
-  * if right, user goes to next "problem"
-* Item:
-  * id
-  * image
-  * Label
-  * Audio prompting
-* generateProblem Pseudo Code:
-  getTheItem
-  pick n-1 from set-theItem
-  Randomly sort them
-* Another way to look at it
-  offset list n-1? [1,2,3,4]
-  random sort
-  slice + random insert
-  map to set
-  
-
+* Have "Game Over" State (maybe an Event)
+* Have Settings View to setup the config for exercises
+* Application should handle "Game Over"
+* Add image and other meta data to ItemModel
+* Have a ItemModelList for a collection of ItemModels
+* Ability to do Audio prompt
+* Different Prompt Config
 
 -->
 
