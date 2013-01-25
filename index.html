@@ -5,12 +5,15 @@
 ToDo:
 
 * Have "Game Over" State (maybe an Event)
-* Have Settings View to setup the config for exercises
 * Application should handle "Game Over"
+
 * Add image and other meta data to ItemModel
 * Have a ItemModelList for a collection of ItemModels
 * Ability to do Audio prompt
 * Different Prompt Config
+* Have Settings View to setup the config for exercises
+* CSS Styling of Exercises
+* Responsive CSS Styling of Exercises
 
 -->
 
@@ -27,6 +30,27 @@ ToDo:
 <script src="http://yui.yahooapis.com/3.8.0/build/yui/yui-min.js"></script>
 <script>
   YUI().use('app-base', 'model', 'view', 'handlebars', function (Y) {
+
+    Y.ItemModel = Y.Base.create('itemModel', Y.Model, [], {
+    }, {
+      ATTRS: {
+        id: {
+          value: null
+        },
+
+        image: {
+          value: null
+        },
+
+        label: {
+          value: null
+        },
+
+        audio: {
+          value: null
+        }
+      }
+    });
 
     Y.ExerciseModel = Y.Base.create('exerciseModel', Y.Model, [], {
 
