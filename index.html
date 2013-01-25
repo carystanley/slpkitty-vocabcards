@@ -164,11 +164,11 @@ ToDo:
       }
     });
 
-    app.route('/speech/', function () {
-      this.showView('home', {name: 'Home'});
-    });
+    //app.route('/speech/', function () {
+    //  this.showView('home', {name: 'Home'});
+    //});
 
-    app.route('/speech/:name', function (req) {
+    app.route('/speech/', function (req) {
       var name = req.params.name;
       var exercise = new Y.ExerciseModel();
       this.showView('exercise', {name: name, model: exercise})
