@@ -6,3 +6,12 @@
 .correct {
   background-color: #afa;
 }
+
+.item {
+  border: 1px solid black;
+  width: 100px;
+  height: 100px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}

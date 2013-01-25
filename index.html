@@ -165,7 +165,7 @@ ToDo:
         '.exercise div': {click: 'chooseItem'}
       },
 
-      template: Y.Handlebars.compile('Choose {{item.label}}: <div class="exercise">Set: {{#each set}}<div data-id="{{id}}">{{label}}</div>{{/each}}</div>'),
+      template: Y.Handlebars.compile('Choose {{item.label}}: <div class="exercise">Set: {{#each set}}<div data-id="{{id}}" class="item">{{label}}</div>{{/each}}</div>'),
 
       initializer: function () {
         var model = this.get('model');
