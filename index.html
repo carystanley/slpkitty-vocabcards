@@ -155,12 +155,14 @@ ToDo:
       },
 
       handleWrong: function(node) {
-        alert('Wrong!');
+        node.addClass('wrong');
       },
 
       handleCorrect: function(node) {
-        alert('Correct');
-        this.get('model').nextProblem();
+        node.addClass('correct');
+        Y.later(300, this, function() {
+          this.get('model').nextProblem();
+        });
       }
     });
 
