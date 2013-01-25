@@ -4,9 +4,7 @@
 
 ToDo:
 
-* Have "Game Over" State (maybe an Event)
 * Application should handle "Game Over"
-
 * Add image and other meta data to ItemModel
 * Ability to do Audio prompt
 * Different Prompt Config
@@ -97,7 +95,12 @@ ToDo:
     Y.ExerciseModel = Y.Base.create('exerciseModel', Y.Model, [], {
 
       nextProblem: function () {
-        this.set('progress', this.get('progress') + 1);
+        var pos = this.get('progress');
+        if (pos+1 >= this.get('items').size()) {
+          this.set('finished', true);
+          this.fire('finished');
+        }
+        this.set('progress', pos + 1);
         this.set('current', null);
       },
 
@@ -112,7 +115,7 @@ ToDo:
       getCurrentProblem: function() {
         var problem = this.get('current');
 
-        if (!problem) {
+        if (!problem && !this.get('finished')) {
           problem = this.get('items').generateProblem(this.get('progress'), this.get('count'));
           this.set('current', problem)
         }
@@ -144,6 +147,10 @@ ToDo:
 
         current: {
           value: null
+        },
+
+        finished: {
+          value: false
         }
       }
     });
@@ -169,16 +176,19 @@ ToDo:
 
       initializer: function () {
         var model = this.get('model');
-        model.after(['reset', 'change'], this.render, this);
+        model.after(['reset', 'progressChange'], this.render, this);
       },
 
       render: function () {
-        var exercise = this.get('model');
-        var item = exercise.getCurrentItem();
-        var set = this.get('model').getCurrentProblem();
-        var html = this.template({item: item.toJSON(), set: set.toJSON()});
+        var exercise = this.get('model'),
+            item = exercise.getCurrentItem(),
+            set = this.get('model').getCurrentProblem(),
+            html;
 
-        this.get('container').setHTML(html);
+        if (!this.get('model').get('finished')) {
+          html = this.template({item: item.toJSON(), set: set.toJSON()});
+          this.get('container').setHTML(html);
+        }
         return this;
       },
 
