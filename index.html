@@ -99,7 +99,7 @@ ToDo:
         },
 
         items: {
-          value: ['apple', 'orange', 'carrot', 'milk', 'bread']
+          value: ['apple', 'orange', 'carrot', 'milk', 'bread', 'banana']
         },
 
         current: {
@@ -143,15 +143,24 @@ ToDo:
       },
 
       chooseItem: function(e) {
-        var item_id = e.currentTarget.getAttribute('data-id'),
+        var node = e.currentTarget,
+            item_id = node.getAttribute('data-id'),
             exercise = this.get('model');
 
         if (exercise.makeGuess(item_id)) {
-          alert('Right!');
-          exercise.nextProblem();
+          this.handleCorrect(node);
         } else {
-          alert('Wrong!');
+          this.handleWrong(node);
         }
+      },
+
+      handleWrong: function(node) {
+        alert('Wrong!');
+      },
+
+      handleCorrect: function(node) {
+        alert('Correct');
+        this.get('model').nextProblem();
       }
     });
 
