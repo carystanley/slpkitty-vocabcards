@@ -4,21 +4,24 @@ ToDo:
 * Add image and other meta data to ItemModel
 * Ability to do Audio prompt
 * Different Prompt Config
-* Have Settings View to setup the config for exercises
-  * http://yuilibrary.com/yui/docs/slider/
 * CSS Styling of Exercises
 * Responsive CSS Styling of Exercises
 * Score Screen?
-* Code Cleanup of App
+* Add Categories to Settings
+* Generate Category ItemLists from Config
 
+* Code Cleanup of App
 * Refactor JS code
-* Have YUI Seed
-* Manifest File (http://www.html5rocks.com/en/tutorials/appcache/beginner/  & chrome://appcache-internals/)
+
+
+# Links:
 
 * Widgets
   * http://yuilibrary.com/gallery/show/bottle
   * http://zordius.github.com/yui3-gallery/gallery-bottle/
 * YUI Rollup - http://yuilibrary.com/yui/configurator/
+* Manifest File (http://www.html5rocks.com/en/tutorials/appcache/beginner/  & chrome://appcache-internals/)
+
 */
 
 YUI().use('app-base', 'model', 'view', 'handlebars', 'model-list', 'slider', function (Y) {
