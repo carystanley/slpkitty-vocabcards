@@ -18,6 +18,7 @@ ToDo:
 * Widgets
   * http://yuilibrary.com/gallery/show/bottle
   * http://zordius.github.com/yui3-gallery/gallery-bottle/
+* YUI Rollup - http://yuilibrary.com/yui/configurator/
 */
 
 YUI().use('app-base', 'model', 'view', 'handlebars', 'model-list', 'slider', function (Y) {
