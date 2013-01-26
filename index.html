@@ -4,7 +4,6 @@
 
 ToDo:
 
-* Application should handle "Game Over"
 * Add image and other meta data to ItemModel
 * Ability to do Audio prompt
 * Different Prompt Config
@@ -157,7 +156,7 @@ ToDo:
     });
 
     Y.HomeView = Y.Base.create('homeView', Y.View, [], {
-      template: Y.Handlebars.compile('Hello {{name}}!, <a href="/speech/examples">Start</a>'),
+      template: Y.Handlebars.compile('Speech'),
 
       render: function () {
         var name = this.get('name'),
@@ -226,13 +225,18 @@ ToDo:
       }
     });
 
-    //app.route('/speech/', function () {
-    //  this.showView('home', {name: 'Home'});
-    //});
+    app.route('/speech/home', function () {
+      this.showView('home', {name: 'Home'});
+    });
 
     app.route('/speech/', function (req) {
-      var name = req.params.name;
-      var exercise = new Y.ExerciseModel();
+      var self = this,
+          name = req.params.name,
+          exercise = new Y.ExerciseModel();
+
+      exercise.on('finished', function() {
+        self.navigate('/speech/home');
+      });
       this.showView('exercise', {name: name, model: exercise})
     });
 
