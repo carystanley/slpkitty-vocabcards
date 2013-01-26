@@ -12,7 +12,7 @@ ToDo:
 
 * Refactor JS code
 * Have YUI Seed
-* Manifest File (http://www.html5rocks.com/en/tutorials/appcache/beginner/)
+* Manifest File (http://www.html5rocks.com/en/tutorials/appcache/beginner/  & chrome://appcache-internals/)
 */
 
 YUI().use('app-base', 'model', 'view', 'handlebars', 'model-list', function (Y) {
@@ -209,26 +209,26 @@ YUI().use('app-base', 'model', 'view', 'handlebars', 'model-list', function (Y) 
     container    : '#wrapper',
     viewContainer: '#wrapper',
     views: {
-      home: {type: 'HomeView', preserve: true},
+      settings: {type: 'HomeView', preserve: true},
       exercise: {type: 'ExerciseView', preserve: true}
     }
   });
 
-  app.route('/speech/home', function () {
-    this.showView('home', {name: 'Home'});
+  app.route('/speech/', function () {
+    this.showView('settings', {name: 'Home'});
   });
 
-  app.route('/speech/', function (req) {
+  app.route('/speech/exercise', function (req) {
     var self = this,
         name = req.params.name,
         exercise = new Y.ExerciseModel();
 
     exercise.on('finished', function() {
-      self.navigate('/speech/home');
+      self.navigate('/settings');
     });
     this.showView('exercise', {name: name, model: exercise})
   });
 
-  app.render().dispatch();
+  app.render().dispatch().navigate('/speech/');
 
 });
