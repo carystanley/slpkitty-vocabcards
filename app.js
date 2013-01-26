@@ -236,7 +236,7 @@ YUI().use('app-base', 'model', 'view', 'handlebars', 'model-list', 'slider', fun
     viewContainer: '#wrapper',
     views: {
       settings: {type: 'SettingsView', preserve: true},
-      exercise: {type: 'ExerciseView', preserve: true}
+      exercise: {type: 'ExerciseView', preserve: false}
     }
   });
 
