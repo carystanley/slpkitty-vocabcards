@@ -23,3 +23,4 @@
 * YUI Rollup - http://yuilibrary.com/yui/configurator/
 * Twitter Bootstrap - http://twitter.github.com/bootstrap/components.html#misc
 * Manifest File (http://www.html5rocks.com/en/tutorials/appcache/beginner/  & chrome://appcache-internals/)
+* SVG Icons: http://thenounproject.com/
