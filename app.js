@@ -148,8 +148,12 @@ YUI().use('app-base', 'model', 'view', 'handlebars', 'model-list', 'slider', fun
     }
   });
 
-  Y.HomeView = Y.Base.create('homeView', Y.View, [], {
+  Y.SettingsView = Y.Base.create('settingsView', Y.View, [], {
     template: Y.Handlebars.compile(Y.one('#settings-template').getHTML()),
+
+    events: {
+      '#settings_submit': {click: 'startExercise'}
+    },
 
     render: function () {
       var name = this.get('name'),
@@ -169,6 +173,12 @@ YUI().use('app-base', 'model', 'view', 'handlebars', 'model-list', 'slider', fun
       slider.render(this.get('container').one('#slider_count'));
 
       return this;
+    },
+
+    startExercise: function() {
+      var count = this.get('container').one('#text_count').get("value");
+      this.fire('start', {count: count});
+      return false;
     }
   });
 
@@ -225,7 +235,7 @@ YUI().use('app-base', 'model', 'view', 'handlebars', 'model-list', 'slider', fun
     container    : '#wrapper',
     viewContainer: '#wrapper',
     views: {
-      settings: {type: 'HomeView', preserve: true},
+      settings: {type: 'SettingsView', preserve: true},
       exercise: {type: 'ExerciseView', preserve: true}
     }
   });
@@ -234,15 +244,19 @@ YUI().use('app-base', 'model', 'view', 'handlebars', 'model-list', 'slider', fun
     this.showView('settings', {name: 'Home'});
   });
 
-  app.route('/speech/exercise', function (req) {
+  app.route('/speech/exercise/:count/', function (req) {
     var self = this,
         name = req.params.name,
-        exercise = new Y.ExerciseModel();
+        exercise = new Y.ExerciseModel({count: req.params.count});
 
     exercise.on('finished', function() {
-      self.navigate('/settings');
+      self.navigate('/speech/');
     });
     this.showView('exercise', {name: name, model: exercise})
+  });
+
+  app.on('*:start', function(e) {
+    this.navigate('/speech/exercise/'+e.count+'/');
   });
 
   app.render().dispatch().navigate('/speech/');
