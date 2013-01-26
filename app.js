@@ -13,9 +13,13 @@ ToDo:
 * Refactor JS code
 * Have YUI Seed
 * Manifest File (http://www.html5rocks.com/en/tutorials/appcache/beginner/  & chrome://appcache-internals/)
+
+* Widgets
+  * http://yuilibrary.com/gallery/show/bottle
+  * http://zordius.github.com/yui3-gallery/gallery-bottle/
 */
 
-YUI().use('app-base', 'model', 'view', 'handlebars', 'model-list', function (Y) {
+YUI().use('app-base', 'model', 'view', 'handlebars', 'model-list', 'slider', function (Y) {
 
   Y.ItemModel = Y.Base.create('itemModel', Y.Model, [], {
   }, {
@@ -145,13 +149,25 @@ YUI().use('app-base', 'model', 'view', 'handlebars', 'model-list', function (Y) 
   });
 
   Y.HomeView = Y.Base.create('homeView', Y.View, [], {
-    template: Y.Handlebars.compile('Speech'),
+    template: Y.Handlebars.compile(Y.one('#settings-template').getHTML()),
 
     render: function () {
       var name = this.get('name'),
-          html = this.template({name: name});
+          html = this.template({name: name})
+          slider = new Y.Slider({
+            axis: 'x',
+            min: 1,
+            max: 9,
+            value: 4
+          });
 
       this.get('container').setHTML(html);
+
+      slider.on('valueChange', function(e) {
+        this.set("value", e.newVal);
+      }, this.get('container').one('#text_count'));
+      slider.render(this.get('container').one('#slider_count'));
+
       return this;
     }
   });
@@ -161,7 +177,7 @@ YUI().use('app-base', 'model', 'view', 'handlebars', 'model-list', function (Y) 
       '.exercise div': {click: 'chooseItem'}
     },
 
-    template: Y.Handlebars.compile('Choose {{item.label}}: <div class="exercise">{{#each set}}<div data-id="{{id}}" class="item">{{label}}</div>{{/each}}</div>'),
+    template: Y.Handlebars.compile(Y.one('#exercise-template').getHTML()),
 
     initializer: function () {
       var model = this.get('model');
