@@ -2,7 +2,6 @@
 
 ## ToDo:
 
-* Add image and other meta data to ItemModel
 * Ability to do Audio prompt
 * Different Prompt Config
 * CSS Styling of Exercises
