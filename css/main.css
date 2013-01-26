@@ -16,3 +16,8 @@
   cursor: hand; 
   cursor: pointer;
 }
+
+.item img {
+  width: 100px;
+  height: 100px;
+}

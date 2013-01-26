@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <title>Example App</title>
+    <base href="http://localhost/speech/">
     <link rel="stylesheet" type="text/css" href="css/main.css"> 
     <link rel="stylesheet" type="text/css" href="css/yui_rollup.css"> 
 </head>
@@ -23,7 +24,7 @@
 Choose {{item.label}}: 
 <div class="exercise">
 {{#each set}}
-<div data-id="{{id}}" class="item">{{label}}</div>
+<div data-id="{{id}}" class="item"><img alt="{{label}}" src="{{image}}"></div>
 {{/each}}
 </div>
 </script>

@@ -107,12 +107,12 @@ YUI().use('app-base', 'model', 'view', 'handlebars', 'model-list', 'slider', fun
       items: {
         value: new Y.ItemList({
           items: [
-            new Y.ItemModel({id: 'apple', label: 'Apple'}),
-            new Y.ItemModel({id: 'carrot', label: 'Carrot'}),
-            new Y.ItemModel({id: 'milk', label: 'Milk'}),
-            new Y.ItemModel({id: 'bread', label: 'Bread'}),
-            new Y.ItemModel({id: 'banana', label: 'Banana'}),
-            new Y.ItemModel({id: 'orange', label: 'Orange'})
+            new Y.ItemModel({id: 'apple', label: 'Apple', image: 'imgs/apple.svg'}),
+            new Y.ItemModel({id: 'carrot', label: 'Carrot', image: 'imgs/carrot.svg'}),
+            new Y.ItemModel({id: 'milk', label: 'Milk', image: 'imgs/milk.svg'}),
+            new Y.ItemModel({id: 'bread', label: 'Bread', image: 'imgs/bread.svg'}),
+            new Y.ItemModel({id: 'banana', label: 'Banana', image: 'imgs/banana.svg'}),
+            new Y.ItemModel({id: 'orange', label: 'Orange', image: 'imgs/orange.svg'})
           ]
         })
       },
@@ -219,8 +219,10 @@ YUI().use('app-base', 'model', 'view', 'handlebars', 'model-list', 'slider', fun
     }
   });
 
+  app.set('navigateOnHash', true);
+
   app.route('/speech/', function () {
-    this.showView('settings', {name: 'Home'});
+    this.showView('settings');
   });
 
   app.route('/speech/exercise/:count/', function (req) {
