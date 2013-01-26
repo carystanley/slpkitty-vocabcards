@@ -9,6 +9,7 @@ ToDo:
 * CSS Styling of Exercises
 * Responsive CSS Styling of Exercises
 * Score Screen?
+* Code Cleanup of App
 
 * Refactor JS code
 * Have YUI Seed
