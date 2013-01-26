@@ -1,4 +1,9 @@
 CACHE MANIFEST
 
+CACHE:
 index.html
 main.css
+app.js
+
+NETWORK:
+http://yui.yahooapis.com/
