@@ -1,25 +1,6 @@
-YUI().use('app-base', 'model', 'view', 'handlebars', 'model-list', 'slider', function (Y) {
+YUI().use('app-base', 'model', 'view', 'handlebars', 'model-list', 'slider', 'item-model', function (Y) {
 
-  Y.ItemModel = Y.Base.create('itemModel', Y.Model, [], {
-  }, {
-    ATTRS: {
-      id: {
-        value: null
-      },
 
-      image: {
-        value: null
-      },
-
-      label: {
-        value: null
-      },
-
-      audio: {
-        value: null
-      }
-    }
-  });
 
   Y.ItemList = Y.Base.create('itemList', Y.ModelList, [], {
     model: Y.ItemModel,
