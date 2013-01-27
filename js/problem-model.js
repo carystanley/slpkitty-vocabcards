@@ -17,7 +17,9 @@ YUI.add('problem-model', function (Y, NAME) {
     },
 
     makeGuess: function(item) {
-      return (this.get('item').get('id') == item);
+      var isCorrect = (this.get('item').get('id') == item);
+      if (!isCorrect) this.set('misses', this.get('misses'))
+      return isCorrect;
     },
 
     toJSON: function() {
@@ -68,8 +70,8 @@ YUI.add('problem-model', function (Y, NAME) {
         value: null
       },
 
-      score: {
-        value: null
+      misses: {
+        value: 0
       }
     }
   });

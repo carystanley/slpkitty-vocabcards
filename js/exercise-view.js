@@ -1,5 +1,13 @@
 YUI.add('exercise-view', function (Y, NAME) {
 
+  Y.Handlebars.registerHelper('score', function (misses) {
+    if (misses > 0) {
+      return '<span class="misses">'+((new Array(misses+1)).join('-'))+'</span>';
+    } else  {
+      return '<span class="correct">+</span>';
+    }
+  });
+
   Y.ExerciseView = Y.Base.create('exercise-view', Y.View, [], {
     events: {
       '.exercise div': {click: 'chooseItem'}
