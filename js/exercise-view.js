@@ -8,6 +8,7 @@ YUI.add('exercise-view', function (Y, NAME) {
     template: Y.Handlebars.compile(Y.one('#exercise-template').getHTML()),
 
     correctAudio: Y.Audio.create({baseUrl: 'audio/woohoo', format: ['wav']}),
+    wrongAudio: Y.Audio.create({baseUrl: 'audio/sound96', format: ['wav']}),
 
     initializer: function () {
       var model = this.get('model');
@@ -40,6 +41,7 @@ YUI.add('exercise-view', function (Y, NAME) {
 
     handleWrong: function(node) {
       node.addClass('wrong');
+      this.wrongAudio.invoke('play');
     },
 
     handleCorrect: function(node) {
