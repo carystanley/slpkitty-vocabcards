@@ -26,7 +26,6 @@ Choose {{problem.item.label}}:
 {{#each problem.problem}}
 <div data-id="{{id}}" class="item"><img alt="{{label}}" src="{{image}}"></div>
 {{/each}}
-{{{score 2}}}
 </div>
 </script>
 
@@ -34,7 +33,7 @@ Choose {{problem.item.label}}:
 {{#each problem.problem}}
 <div>
 {{item.label}}
-{{{score 2}}}
+{{{score misses}}}
 </div>
 {{/each}}
 </div>
