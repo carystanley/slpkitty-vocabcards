@@ -87,6 +87,7 @@ YUI.add('exercise-model', function (Y, NAME) {
         'model-list',
         'item-model',
         'item-modellist',
-        'problem-model'
+        'problem-model',
+        'gallery-audio'
     ]
 });

@@ -7,6 +7,8 @@ YUI.add('exercise-view', function (Y, NAME) {
 
     template: Y.Handlebars.compile(Y.one('#exercise-template').getHTML()),
 
+    correctAudio: Y.Audio.create({baseUrl: 'audio/woohoo', format: ['wav']}),
+
     initializer: function () {
       var model = this.get('model');
       model.after(['reset', 'progressChange'], this.render, this);
@@ -42,6 +44,7 @@ YUI.add('exercise-view', function (Y, NAME) {
 
     handleCorrect: function(node) {
       node.addClass('correct');
+      this.correctAudio.invoke('play');
       Y.later(300, this, function() {
         this.get('model').nextProblem();
       });
@@ -55,6 +58,7 @@ YUI.add('exercise-view', function (Y, NAME) {
         'view', 
         'handlebars',
         'exercise-model',
-        'item-model'
+        'item-model',
+        'gallery-audio'
     ]
 });
