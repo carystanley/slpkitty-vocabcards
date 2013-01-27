@@ -54,16 +54,7 @@ YUI.add('exercise-model', function (Y, NAME) {
       },
 
       items: {
-        value: new Y.ItemList({
-          items: [
-            new Y.ItemModel({id: 'apple', label: 'Apple', image: 'imgs/apple.svg'}),
-            new Y.ItemModel({id: 'carrot', label: 'Carrot', image: 'imgs/carrot.svg'}),
-            new Y.ItemModel({id: 'milk', label: 'Milk', image: 'imgs/milk.svg'}),
-            new Y.ItemModel({id: 'bread', label: 'Bread', image: 'imgs/bread.svg'}),
-            new Y.ItemModel({id: 'banana', label: 'Banana', image: 'imgs/banana.svg'}),
-            new Y.ItemModel({id: 'orange', label: 'Orange', image: 'imgs/orange.svg'})
-          ]
-        })
+        value: Y.Categories['food']
       },
 
       problems: {
@@ -88,6 +79,7 @@ YUI.add('exercise-model', function (Y, NAME) {
         'item-model',
         'item-modellist',
         'problem-model',
-        'gallery-audio'
+        'gallery-audio',
+        'categories'
     ]
 });

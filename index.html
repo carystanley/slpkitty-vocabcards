@@ -26,6 +26,17 @@ Choose {{problem.item.label}}:
 {{#each problem.problem}}
 <div data-id="{{id}}" class="item"><img alt="{{label}}" src="{{image}}"></div>
 {{/each}}
+{{{score 2}}}
+</div>
+</script>
+
+<script id="score-template" type="text/x-handlebars-template">
+{{#each problem.problem}}
+<div>
+{{item.label}}
+{{{score 2}}}
+</div>
+{{/each}}
 </div>
 </script>
 
@@ -34,6 +45,7 @@ Choose {{problem.item.label}}:
 <script src="js/problem-model.js"></script>
 <script src="js/item-model.js"></script>
 <script src="js/item-modellist.js"></script>
+<script src="js/categories.js"></script>
 <script src="js/exercise-model.js"></script>
 <script src="js/exercise-view.js"></script>
 <script src="js/settings-view.js"></script>
