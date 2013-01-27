@@ -14,9 +14,16 @@
 
 <script id="settings-template" type="text/x-handlebars-template">
 <div>Settings</div>
+Category: <select id="category">
+{{#each categories}}
+<option>{{.}}</option>
+{{/each}}
+</select>
+</div>
 <div class="yui3-skin-sam" id="slider_count">
 <input id="text_count" name="count" type="text">
 </div>
+<div>
 <button id="settings_submit">Start</button>
 </script>
 

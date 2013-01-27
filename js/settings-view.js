@@ -9,7 +9,7 @@ YUI.add('settings-view', function (Y, NAME) {
 
     render: function () {
       var name = this.get('name'),
-          html = this.template({name: name})
+          html = this.template({categories: Object.keys(Y.Categories)})
           slider = new Y.Slider({
             axis: 'x',
             min: 1,
@@ -28,8 +28,11 @@ YUI.add('settings-view', function (Y, NAME) {
     },
 
     startExercise: function() {
-      var count = this.get('container').one('#text_count').get("value");
-      this.fire('start', {count: count});
+      var container = this.get('container');
+      this.fire('start', {
+        count: container.one('#text_count').get("value"), 
+        category: container.one('#category').get("value")
+      });
       return false;
     }
   });
@@ -39,6 +42,7 @@ YUI.add('settings-view', function (Y, NAME) {
     requires : [
         'view',
         'slider',
-        'handlebars'
+        'handlebars',
+        'categories'
     ]
 });

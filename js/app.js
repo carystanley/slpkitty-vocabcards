@@ -1,4 +1,4 @@
-YUI().use('app-base', 'item-model', 'item-modellist', 'exercise-model', 'settings-view', 'exercise-view',  function (Y) {
+YUI().use('app-base', 'item-model', 'item-modellist', 'exercise-model', 'settings-view', 'exercise-view',  'categories', function (Y) {
 
   var app = new Y.App({
     container    : '#wrapper',
@@ -9,16 +9,13 @@ YUI().use('app-base', 'item-model', 'item-modellist', 'exercise-model', 'setting
     }
   });
 
-  app.set('navigateOnHash', true);
-
   app.route('/speech/', function () {
     this.showView('settings');
   });
 
-  app.route('/speech/exercise/:count/', function (req) {
-    var self = this,
-        name = req.params.name,
-        exercise = new Y.ExerciseModel({count: parseInt(req.params.count, 10)});
+  app.route('/speech/exercise/', function (req) {
+    var self = this
+        exercise = this.get('exercise');
 
     exercise.on('finished', function() {
       self.navigate('/speech/');
@@ -27,7 +24,11 @@ YUI().use('app-base', 'item-model', 'item-modellist', 'exercise-model', 'setting
   });
 
   app.on('*:start', function(e) {
-    this.navigate('/speech/exercise/'+e.count+'/');
+    this.set('exercise', new Y.ExerciseModel({
+      count: e.count,
+      items: Y.Categories[e.category]
+    }));
+    this.navigate('/speech/exercise/');
   });
 
   app.render().dispatch().navigate('/speech/');

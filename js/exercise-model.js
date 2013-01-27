@@ -54,7 +54,7 @@ YUI.add('exercise-model', function (Y, NAME) {
       },
 
       items: {
-        value: Y.Categories['food']
+        value: null
       },
 
       problems: {
