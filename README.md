@@ -25,3 +25,4 @@
 * Manifest File (http://www.html5rocks.com/en/tutorials/appcache/beginner/  & chrome://appcache-internals/)
 * SVG Icons: http://thenounproject.com/
 * Sounds: http://www.pacdv.com/sounds/voices-1.html
+* Cool Slider: http://jquerymobile.com/demos/1.2.0/docs/forms/slider/
