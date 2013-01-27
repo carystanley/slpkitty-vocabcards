@@ -2,7 +2,11 @@
 
 ## ToDo:
 
-* Add "Problem" Model & "ProblemList" to Keep Score
+
+* Make Exercise into Problem List
+* Rename Problems "problem" to "choices"
+* Organize Categories into "Config"
+* Allow user to select Category from DropDown
 * Ability to do Audio prompt
 * Different Prompt Config
 * CSS Styling of Exercises
