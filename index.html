@@ -30,14 +30,14 @@ Category: <select id="category">
 <script id="exercise-template" type="text/x-handlebars-template">
 Choose {{problem.item.label}}: 
 <div class="exercise">
-{{#each problem.problem}}
+{{#each problem.choices}}
 <div data-id="{{id}}" class="item"><img alt="{{label}}" src="{{image}}"></div>
 {{/each}}
 </div>
 </script>
 
 <script id="score-template" type="text/x-handlebars-template">
-{{#each problem.problem}}
+{{#each problem}}
 <div>
 {{item.label}}
 {{{score misses}}}

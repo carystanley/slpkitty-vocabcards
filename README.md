@@ -3,7 +3,6 @@
 ## ToDo:
 
 * Make Exercise into Problem List
-* Rename Problems "problem" to "choices"
 * Ability to do Audio prompt
 * Different Prompt Config
 * CSS Styling of Exercises

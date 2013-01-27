@@ -7,13 +7,13 @@ YUI.add('problem-model', function (Y, NAME) {
           x,
           pos = config.position,
           category = config.category,
-          problem = new Y.ItemList();
+          choices = new Y.ItemList();
 
       map = this._generateProblem(pos, config.count, category.size());
       for (x = 0; x < map.length ; x++) {
-        problem.add(category.item(map[x]));
+        choices.add(category.item(map[x]));
       }
-      this.set('problem', problem);
+      this.set('choices', choices);
     },
 
     makeGuess: function(item) {
@@ -25,7 +25,7 @@ YUI.add('problem-model', function (Y, NAME) {
     toJSON: function() {
       return {
         item: this.get('item').toJSON(),
-        problem: this.get('problem').toJSON(),
+        choices: this.get('choices').toJSON(),
         score: this.get('score')
       };
     },
@@ -58,7 +58,7 @@ YUI.add('problem-model', function (Y, NAME) {
     }
   }, {
     ATTRS: {
-      problem: {
+      choices: {
         value: null
       },
 
