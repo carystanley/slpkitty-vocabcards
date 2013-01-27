@@ -18,7 +18,7 @@ YUI().use('app-base', 'item-model', 'item-modellist', 'exercise-model', 'setting
   app.route('/speech/exercise/:count/', function (req) {
     var self = this,
         name = req.params.name,
-        exercise = new Y.ExerciseModel({count: req.params.count});
+        exercise = new Y.ExerciseModel({count: parseInt(req.params.count, 10)});
 
     exercise.on('finished', function() {
       self.navigate('/speech/');

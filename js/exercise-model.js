@@ -2,31 +2,44 @@ YUI.add('exercise-model', function (Y, NAME) {
 
   Y.ExerciseModel = Y.Base.create('exercise-model', Y.Model, [], {
 
+    initializer: function(config) {
+       var x,
+           count = config.count,
+           category = this.get('items'),
+           problems = new Y.ModelList();
+
+       for (x = 0; x < category.size(); x++) {
+         problems.add(new Y.ProblemModel({
+           position: x,
+           item: category.item(x),
+           count: count,
+           category: category
+         }));
+       }
+       this.set('problems', problems);
+    },
+
     nextProblem: function () {
       var pos = this.get('progress');
-      if (pos+1 >= this.get('items').size()) {
+      if (pos+1 >= this.get('problems').size()) {
         this.set('finished', true);
         this.fire('finished');
       }
-      this.set('current', null);
       this.set('progress', pos + 1);
     },
 
     makeGuess: function(item) {
-      return (this.getCurrentItem().get('id') == item);
-    },
-
-    getCurrentItem: function() {
-      return this.get('items').item(this.get('progress'));
+      return this.getCurrentProblem().makeGuess(item);
     },
 
     getCurrentProblem: function() {
-      var problem = this.get('current');
+      var progress = this.get('progress'),
+          problem = null;
 
-      if (!problem && !this.get('finished')) {
-        problem = this.get('items').generateProblem(this.get('progress'), this.get('count'));
-        this.set('current', problem)
+      if (!this.get('finished')) {
+        return this.get('problems').item(progress);
       }
+
       return problem;
     }
 
@@ -53,6 +66,10 @@ YUI.add('exercise-model', function (Y, NAME) {
         })
       },
 
+      problems: {
+        value: null
+      },
+
       current: {
         value: null
       },
@@ -67,7 +84,9 @@ YUI.add('exercise-model', function (Y, NAME) {
 }, '0.0.2', {
     requires : [
         'model',
+        'model-list',
         'item-model',
-        'item-modellist'
+        'item-modellist',
+        'problem-model'
     ]
 });

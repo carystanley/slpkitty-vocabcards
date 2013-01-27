@@ -14,12 +14,11 @@ YUI.add('exercise-view', function (Y, NAME) {
 
     render: function () {
       var exercise = this.get('model'),
-          item = exercise.getCurrentItem(),
-          set = this.get('model').getCurrentProblem(),
+          problem = this.get('model').getCurrentProblem(),
           html;
 
       if (!this.get('model').get('finished')) {
-        html = this.template({item: item.toJSON(), set: set.toJSON()});
+        html = this.template({problem: problem.toJSON()});
         this.get('container').setHTML(html);
       }
       return this;

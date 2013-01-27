@@ -21,9 +21,9 @@
 </script>
 
 <script id="exercise-template" type="text/x-handlebars-template">
-Choose {{item.label}}: 
+Choose {{problem.item.label}}: 
 <div class="exercise">
-{{#each set}}
+{{#each problem.problem}}
 <div data-id="{{id}}" class="item"><img alt="{{label}}" src="{{image}}"></div>
 {{/each}}
 </div>
