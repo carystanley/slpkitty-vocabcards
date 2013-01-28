@@ -14,18 +14,32 @@
 <div id="wrapper" class="yui3-app yui3-app-views"></div>
 
 <script id="settings-template" type="text/x-handlebars-template">
-<div>Settings</div>
-Category: <select id="category">
-{{#each categories}}
-<option>{{.}}</option>
-{{/each}}
-</select>
+<h1>Settings</h1>
+<div class="form-horizontal">
+  <div class="control-group">
+    <label class="control-label" for="category">Category</label>
+    <div class="controls">
+      <select id="category">
+      {{#each categories}}
+        <option>{{.}}</option>
+      {{/each}}
+      </select>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="slider_count">Count</label>
+    <div class="controls">
+      <div class="yui3-skin-sam" id="slider_count">
+        <input id="text_count" name="count" type="text">
+      </div>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <button class="btn btn-primary btn-large" id="settings_submit">Start</button>
+    </div>
+  </div>
 </div>
-<div class="yui3-skin-sam" id="slider_count">
-<input id="text_count" name="count" type="text">
-</div>
-<div>
-<button class="btn btn-primary btn-large" id="settings_submit">Start</button>
 </script>
 
 <script id="exercise-template" type="text/x-handlebars-template">
