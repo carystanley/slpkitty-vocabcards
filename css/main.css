@@ -14,11 +14,11 @@
 
 .item {
   display: inline-block;
+  width: 33%;
   cursor: hand; 
   cursor: pointer;
 }
 
 .item img {
-  width: 300px;
-  height: 300px;
+  width: 100%;
 }
