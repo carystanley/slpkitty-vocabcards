@@ -9,16 +9,16 @@ YUI().use('app-base', 'item-model', 'item-modellist', 'exercise-model', 'setting
     }
   });
 
-  app.route('/speech/', function () {
+  app.route('/slpkitty-vocabcards/', function () {
     this.showView('settings');
   });
 
-  app.route('/speech/exercise/', function (req) {
+  app.route('/slpkitty-vocabcards/exercise/', function (req) {
     var self = this
         exercise = this.get('exercise');
 
     exercise.on('finished', function() {
-      self.navigate('/speech/');
+      self.navigate('/slpkitty-vocabcards/');
     });
     this.showView('exercise', {name: name, model: exercise})
   });
@@ -28,9 +28,9 @@ YUI().use('app-base', 'item-model', 'item-modellist', 'exercise-model', 'setting
       count: e.count,
       items: Y.Categories[e.category]
     }));
-    this.navigate('/speech/exercise/');
+    this.navigate('/slpkitty-vocabcards/exercise/');
   });
 
-  app.render().dispatch().navigate('/speech/');
+  app.render().dispatch().navigate('/slpkitty-vocabcards/');
 
 });
