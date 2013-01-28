@@ -10,7 +10,7 @@ YUI.add('exercise-view', function (Y, NAME) {
 
   Y.ExerciseView = Y.Base.create('exercise-view', Y.View, [], {
     events: {
-      '.exercise div': {click: 'chooseItem'}
+      '.exercise .item': {click: 'chooseItem'}
     },
 
     template: Y.Handlebars.compile(Y.one('#exercise-template').getHTML()),

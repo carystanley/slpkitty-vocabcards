@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <title>Example App</title>
     <base href="http://carystanley.github.com/slpkitty-vocabcards/">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css"> 
     <link rel="stylesheet" type="text/css" href="css/main.css"> 
     <link rel="stylesheet" type="text/css" href="css/yui_rollup.css"> 
 </head>
@@ -13,27 +14,41 @@
 <div id="wrapper" class="yui3-app yui3-app-views"></div>
 
 <script id="settings-template" type="text/x-handlebars-template">
-<div>Settings</div>
-Category: <select id="category">
-{{#each categories}}
-<option>{{.}}</option>
-{{/each}}
-</select>
+<h1>Settings</h1>
+<div class="form-horizontal">
+  <div class="control-group">
+    <label class="control-label" for="category">Category</label>
+    <div class="controls">
+      <select id="category">
+      {{#each categories}}
+        <option>{{.}}</option>
+      {{/each}}
+      </select>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="slider_count">Count</label>
+    <div class="controls">
+      <div class="yui3-skin-sam" id="slider_count">
+        <input id="text_count" name="count" type="text">
+      </div>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <button class="btn btn-primary btn-large" id="settings_submit">Start</button>
+    </div>
+  </div>
 </div>
-<div class="yui3-skin-sam" id="slider_count">
-<input id="text_count" name="count" type="text">
-</div>
-<div>
-<button id="settings_submit">Start</button>
 </script>
 
 <script id="exercise-template" type="text/x-handlebars-template">
 Choose {{problem.item.label}}: 
-<div class="exercise">
+<ul class="exercise">
 {{#each problem.choices}}
-<div data-id="{{id}}" class="item"><img alt="{{label}}" src="{{image}}"></div>
+<li data-id="{{id}}" class="item"><img alt="{{label}}" src="{{image}}"></li>
 {{/each}}
-</div>
+</ul>
 </script>
 
 <script id="score-template" type="text/x-handlebars-template">

@@ -26,3 +26,4 @@
 * SVG Icons: http://thenounproject.com/
 * Sounds: http://www.pacdv.com/sounds/voices-1.html
 * Cool Slider: http://jquerymobile.com/demos/1.2.0/docs/forms/slider/
+* iPad Dimensions: http://upstageapp.com/resources
