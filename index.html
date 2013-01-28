@@ -29,11 +29,11 @@ Category: <select id="category">
 
 <script id="exercise-template" type="text/x-handlebars-template">
 Choose {{problem.item.label}}: 
-<div class="exercise">
+<ul class="exercise">
 {{#each problem.choices}}
-<div data-id="{{id}}" class="item"><img alt="{{label}}" src="{{image}}"></div>
+<li data-id="{{id}}" class="item"><img alt="{{label}}" src="{{image}}"></li>
 {{/each}}
-</div>
+</ul>
 </script>
 
 <script id="score-template" type="text/x-handlebars-template">
