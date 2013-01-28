@@ -9,20 +9,9 @@ YUI.add('settings-view', function (Y, NAME) {
 
     render: function () {
       var name = this.get('name'),
-          html = this.template({categories: Object.keys(Y.Categories)})
-          slider = new Y.Slider({
-            axis: 'x',
-            min: 1,
-            max: 9,
-            value: 4
-          });
+          html = this.template({categories: Object.keys(Y.Categories)});
 
       this.get('container').setHTML(html);
-
-      slider.on('valueChange', function(e) {
-        this.set("value", e.newVal);
-      }, this.get('container').one('#text_count'));
-      slider.render(this.get('container').one('#slider_count'));
 
       return this;
     },
@@ -41,7 +30,6 @@ YUI.add('settings-view', function (Y, NAME) {
 }, '0.0.2', {
     requires : [
         'view',
-        'slider',
         'handlebars',
         'categories'
     ]
