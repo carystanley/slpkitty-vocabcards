@@ -81,6 +81,14 @@ Choose {{problem.item.label}}:
 <script src="js/exercise-view.js"></script>
 <script src="js/settings-view.js"></script>
 <script src="js/app.js"></script>
-
+<script>
+YUI().use('speech-app', function (Y) {
+  var app = new Y.SpeechApp({
+    container    : '#wrapper',
+    viewContainer: '#wrapper'
+  });
+  app.render().dispatch().navigate('/slpkitty-vocabcards/');
+});
+</script>
 </body>
 </html>
