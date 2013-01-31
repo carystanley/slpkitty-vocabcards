@@ -21,6 +21,7 @@ YUI.add('exercise-view', function (Y, NAME) {
     initializer: function () {
       var model = this.get('model');
       model.after(['reset', 'progressChange'], this.render, this);
+      model.after(['finished'], this.handleFinished, this);
     },
 
     render: function () {
@@ -33,6 +34,10 @@ YUI.add('exercise-view', function (Y, NAME) {
         this.get('container').setHTML(html);
       }
       return this;
+    },
+
+    handleFinished: function(e) {
+      this.fire('finished');
     },
 
     chooseItem: function(e) {

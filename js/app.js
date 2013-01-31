@@ -7,7 +7,8 @@ YUI.add('speech-app', function (Y, NAME) {
     },
 
     initializer: function () {
-	  this.on('*:start', this.startExercise);
+      this.on('*:start', this.startExercise);
+      this.on('*:finished', this.showSettings);
     },
 
     startExercise: function(e) {
@@ -19,13 +20,7 @@ YUI.add('speech-app', function (Y, NAME) {
     },
 
     showExercise: function (req) {
-      var self = this
-          exercise = this.get('exercise');
-
-      exercise.on('finished', function() {
-        self.navigate('/slpkitty-vocabcards/');
-      });
-      this.showView('exercise', {name: name, model: exercise})
+      this.showView('exercise', {name: name, model: this.get('exercise')})
     },
 
     showSettings: function () {
